@@ -1,0 +1,301 @@
+<html>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<head></head>
+<body>
+    <div class="wrapper">
+        <div class='header'>
+            <div class='row clearfix'>
+                <div class='brand'>
+                    <img src="{{ url_for('static', filename='logo1.png') }}"  class="shark_btn stop" />
+                </div>
+                <div class='logo2'>
+                    <img src="{{ url_for('static', filename='logo2.png') }}"  class="shark_btn stop" />
+                </div>
+            </div>
+        </div>
+        <form name="aform" action="/" method="post">
+            <div class='content'>
+            <h2 class='period'> Address: <INPUT class="addr" name="address" VALUE=""></h2>
+            <h2 class='period'> Number of Units: <INPUT class="nunit" name="nunit" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6"></h2>
+
+            <div class="clearfix main">
+                <table class="main_table">
+                    <tbody>
+                        <tr class="title">
+                            <td>Fixture Type</td>
+                            <td>Count</td>
+                            <td>Extended</td>
+                        </tr>
+                        <tr>
+                            <td>Showers</td>
+                            <td class="nopadding"><INPUT name="showers" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6" onchange="changeShowers()"></td>
+                            <td><label name="extShowers">0</label></td>
+                        </tr>
+                        <tr>
+                            <td>Bathroom Sinks</td>
+                            <td class="nopadding"><INPUT name="bathroom_sinks" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6" onchange="changeBathroom_sinks()"></td>
+                            <td><label name="extBathroom_sinks">0</label></td>
+                        </tr>
+                        <tr>
+                            <td>Kitchen Sinks</td>
+                            <td class="nopadding"><INPUT name="kitchen_sinks" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6" onchange="changeKitchen_sinks()"></td>
+                            <td><label name="extKitchen_sinks">0</label></td>
+                        </tr>
+                        <tr>
+                            <td>Dish Washers</td>
+                            <td class="nopadding"><INPUT name="dishwashers" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6" onchange="changeDishwashers()"></td>
+                            <td><label name="extDishwashers">0</label></td>
+                        </tr>
+                        <tr>
+                            <td>In-Unit Clothes Washer</td>
+                            <td class="nopadding"><INPUT name="uclothes_washer" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6" onchange="changeUclothes_washer()"></td>
+                            <td><label name="extUclothes_washer">0</label></td>
+                        </tr>
+                        <tr>
+                            <td>Commercial Clothes Washer</td>
+                            <td class="nopadding"><INPUT name="cclothes_washer" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6" onchange="changeCclothes_washer()"></td>
+                            <td><label name="extCclothes_washer">0</label></td>
+                        </tr>
+                        <tr>
+                            <td>Slop Sink</td>
+                            <td class="nopadding"><INPUT name="slop_sink" TYPE="NUMBER" MIN="0" STEP="1" VALUE="0" SIZE="6" onchange="changeSlop_sink()"></td>
+                            <td><label name="extSlop_sink">0</label></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix main">
+                <table class="main_table">
+                    <tbody>
+                        <tr style="font-weight: bold;">
+                            <td>Total FU</td>
+                            <td>GPM</td>
+                            <td>Cv Required</td>
+                        </tr>
+                        <tr>
+                            <td><label name="totalFU" /></td>
+                            <td><label name="gpm" /></td>
+                            <td><label name="cv" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix main">
+                <input name="fu" type="hidden" />
+                <input name="g" type="hidden" />
+                <input name="c" type="hidden" />
+                <input class="btn" type="button" value="Generate Report" onclick="onSubmit()" />
+                <input class="btn" type="button" value="Reset" onclick="onReset()"/>
+            </div>
+        </div>
+        </form>
+    </div>
+    <script>
+        function onSubmit(){
+            var addr = document.getElementsByName('address')[0];
+
+            if (addr.value == ''){
+                alert('Please enter an address');
+                addr.focus();
+
+            }else{
+                document.aform.submit();
+            }
+
+        }
+        function onReset(){
+            document.getElementsByName('showers')[0].value = 0;
+            document.getElementsByName('bathroom_sinks')[0].value = 0;
+            document.getElementsByName('kitchen_sinks')[0].value = 0;
+            document.getElementsByName('dishwashers')[0].value = 0;
+            document.getElementsByName('uclothes_washer')[0].value = 0;
+            document.getElementsByName('cclothes_washer')[0].value = 0;
+            document.getElementsByName('slop_sink')[0].value = 0;
+
+            document.getElementsByName('totalFU')[0].innerHTML = ''
+            document.getElementsByName('gpm')[0].innerHTML = '';
+            document.getElementsByName('cv')[0].innerHTML = '';
+
+            document.getElementsByName('extShowers')[0].innerHTML = '0';
+            document.getElementsByName('extBathroom_sinks')[0].innerHTML = '0';
+            document.getElementsByName('extKitchen_sinks')[0].innerHTML = '0';
+            document.getElementsByName('extDishwashers')[0].innerHTML = '0';
+            document.getElementsByName('extUclothes_washer')[0].innerHTML = '0';
+            document.getElementsByName('extCclothes_washer')[0].innerHTML = '0';
+            document.getElementsByName('extSlop_sink')[0].innerHTML = '0';
+
+            document.getElementsByName('address')[0].value = '';
+            document.getElementsByName('nunit')[0].value = 0;
+        }
+        function changeShowers(){
+            showers = document.getElementsByName('showers')[0].value;
+            document.getElementsByName('extShowers')[0].innerHTML = showers * 1.2;
+
+            bathroom_sinks = document.getElementsByName('bathroom_sinks')[0].value;
+            kitchen_sinks = document.getElementsByName('kitchen_sinks')[0].value;
+            dishwashers = document.getElementsByName('dishwashers')[0].value;
+            uclothes_washer = document.getElementsByName('uclothes_washer')[0].value;
+            cclothes_washer = document.getElementsByName('cclothes_washer')[0].value;
+            slop_sink = document.getElementsByName('slop_sink')[0].value;
+
+            var total_fu = (parseFloat(showers) * 1.2 + parseFloat(bathroom_sinks) * 0.75 + parseFloat(dishwashers) * 1.1 + parseFloat(kitchen_sinks) * 0.75 + parseFloat(uclothes_washer) * 1.1 + parseFloat(cclothes_washer) * 2 + parseFloat(slop_sink)).toFixed(2);
+            document.getElementsByName('totalFU')[0].innerHTML = total_fu
+
+            var gpm = getGPM(total_fu);
+            document.getElementsByName('gpm')[0].innerHTML = gpm;
+            document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
+            document.getElementsByName('fu')[0].value = total_fu;
+            document.getElementsByName('g')[0].value = gpm;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+        }
+
+        function changeBathroom_sinks(){
+            bathroom_sinks = document.getElementsByName('bathroom_sinks')[0].value;
+            document.getElementsByName('extBathroom_sinks')[0].innerHTML = bathroom_sinks * 0.75;
+
+            showers = document.getElementsByName('showers')[0].value;
+            kitchen_sinks = document.getElementsByName('kitchen_sinks')[0].value;
+            dishwashers = document.getElementsByName('dishwashers')[0].value;
+            uclothes_washer = document.getElementsByName('uclothes_washer')[0].value;
+            cclothes_washer = document.getElementsByName('cclothes_washer')[0].value;
+            slop_sink = document.getElementsByName('slop_sink')[0].value;
+
+            var total_fu = (parseFloat(showers) * 1.2 + parseFloat(bathroom_sinks) * 0.75 + parseFloat(dishwashers) * 1.1 + parseFloat(kitchen_sinks) * 0.75 + parseFloat(uclothes_washer) * 1.1 + parseFloat(cclothes_washer) * 2 + parseFloat(slop_sink)).toFixed(2);
+            document.getElementsByName('totalFU')[0].innerHTML = total_fu;
+
+            var gpm = getGPM(total_fu);
+            document.getElementsByName('gpm')[0].innerHTML = gpm;
+            document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
+            document.getElementsByName('fu')[0].value = total_fu;
+            document.getElementsByName('g')[0].value = gpm;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+        }
+
+        function changeKitchen_sinks(){
+            kitchen_sinks = document.getElementsByName('kitchen_sinks')[0].value;
+            document.getElementsByName('extKitchen_sinks')[0].innerHTML = kitchen_sinks * 0.75;
+
+            showers = document.getElementsByName('showers')[0].value;
+            bathroom_sinks = document.getElementsByName('bathroom_sinks')[0].value;
+            dishwashers = document.getElementsByName('dishwashers')[0].value;
+            uclothes_washer = document.getElementsByName('uclothes_washer')[0].value;
+            cclothes_washer = document.getElementsByName('cclothes_washer')[0].value;
+            slop_sink = document.getElementsByName('slop_sink')[0].value;
+
+            var total_fu = (parseFloat(showers) * 1.2 + parseFloat(bathroom_sinks) * 0.75 + parseFloat(dishwashers) * 1.1 + parseFloat(kitchen_sinks) * 0.75 + parseFloat(uclothes_washer) * 1.1 + parseFloat(cclothes_washer) * 2 + parseFloat(slop_sink)).toFixed(2);
+            document.getElementsByName('totalFU')[0].innerHTML = total_fu
+
+            var gpm = getGPM(total_fu);
+            document.getElementsByName('gpm')[0].innerHTML = gpm;
+            document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
+            document.getElementsByName('fu')[0].value = total_fu;
+            document.getElementsByName('g')[0].value = gpm;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+        }
+
+        function changeDishwashers(){
+            dishwashers = document.getElementsByName('dishwashers')[0].value;
+            document.getElementsByName('extDishwashers')[0].innerHTML = dishwashers * 1.1;
+
+            showers = document.getElementsByName('showers')[0].value;
+            bathroom_sinks = document.getElementsByName('bathroom_sinks')[0].value;
+            kitchen_sinks = document.getElementsByName('kitchen_sinks')[0].value;
+            uclothes_washer = document.getElementsByName('uclothes_washer')[0].value;
+            cclothes_washer = document.getElementsByName('cclothes_washer')[0].value;
+            slop_sink = document.getElementsByName('slop_sink')[0].value;
+
+            var total_fu = (parseFloat(showers) * 1.2 + parseFloat(bathroom_sinks) * 0.75 + parseFloat(dishwashers) * 1.1 + parseFloat(kitchen_sinks) * 0.75 + parseFloat(uclothes_washer) * 1.1 + parseFloat(cclothes_washer) * 2 + parseFloat(slop_sink)).toFixed(2);
+            document.getElementsByName('totalFU')[0].innerHTML = total_fu
+
+            var gpm = getGPM(total_fu);
+            document.getElementsByName('gpm')[0].innerHTML = gpm;
+            document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
+            document.getElementsByName('fu')[0].value = total_fu;
+            document.getElementsByName('g')[0].value = gpm;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+        }
+
+        function changeUclothes_washer(){
+            uclothes_washer = document.getElementsByName('uclothes_washer')[0].value;
+            document.getElementsByName('extUclothes_washer')[0].innerHTML = uclothes_washer * 1.1;
+
+            showers = document.getElementsByName('showers')[0].value;
+            bathroom_sinks = document.getElementsByName('bathroom_sinks')[0].value;
+            kitchen_sinks = document.getElementsByName('kitchen_sinks')[0].value;
+            dishwashers = document.getElementsByName('dishwashers')[0].value;
+            cclothes_washer = document.getElementsByName('cclothes_washer')[0].value;
+            slop_sink = document.getElementsByName('slop_sink')[0].value;
+
+            var total_fu = (parseFloat(showers) * 1.2 + parseFloat(bathroom_sinks) * 0.75 + parseFloat(dishwashers) * 1.1 + parseFloat(kitchen_sinks) * 0.75 + parseFloat(uclothes_washer) * 1.1 + parseFloat(cclothes_washer) * 2 + parseFloat(slop_sink)).toFixed(2);
+            document.getElementsByName('totalFU')[0].innerHTML = total_fu
+
+            var gpm = getGPM(total_fu);
+            document.getElementsByName('gpm')[0].innerHTML = gpm;
+            document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
+            document.getElementsByName('fu')[0].value = total_fu;
+            document.getElementsByName('g')[0].value = gpm;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+        }
+
+        function changeCclothes_washer(){
+            cclothes_washer = document.getElementsByName('cclothes_washer')[0].value;
+            document.getElementsByName('extCclothes_washer')[0].innerHTML = cclothes_washer * 2;
+
+            showers = document.getElementsByName('showers')[0].value;
+            bathroom_sinks = document.getElementsByName('bathroom_sinks')[0].value;
+            kitchen_sinks = document.getElementsByName('kitchen_sinks')[0].value;
+            dishwashers = document.getElementsByName('dishwashers')[0].value;
+            uclothes_washer = document.getElementsByName('uclothes_washer')[0].value;
+            slop_sink = document.getElementsByName('slop_sink')[0].value;
+
+            var total_fu = (parseFloat(showers) * 1.2 + parseFloat(bathroom_sinks) * 0.75 + parseFloat(dishwashers) * 1.1 + parseFloat(kitchen_sinks) * 0.75 + parseFloat(uclothes_washer) * 1.1 + parseFloat(cclothes_washer) * 2 + parseFloat(slop_sink)).toFixed(2);
+            document.getElementsByName('totalFU')[0].innerHTML = total_fu
+
+            var gpm = getGPM(total_fu);
+            document.getElementsByName('gpm')[0].innerHTML = gpm;
+            document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
+            document.getElementsByName('fu')[0].value = total_fu;
+            document.getElementsByName('g')[0].value = gpm;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+        }
+
+        function changeSlop_sink(){
+            slop_sink = document.getElementsByName('slop_sink')[0].value;
+            document.getElementsByName('extSlop_sink')[0].innerHTML = slop_sink;
+
+            showers = document.getElementsByName('showers')[0].value;
+            bathroom_sinks = document.getElementsByName('bathroom_sinks')[0].value;
+            kitchen_sinks = document.getElementsByName('kitchen_sinks')[0].value;
+            dishwashers = document.getElementsByName('dishwashers')[0].value;
+            uclothes_washer = document.getElementsByName('uclothes_washer')[0].value;
+            cclothes_washer = document.getElementsByName('cclothes_washer')[0].value;
+
+            var total_fu = (parseFloat(showers) * 1.2 + parseFloat(bathroom_sinks) * 0.75 + parseFloat(dishwashers) * 1.1 + parseFloat(kitchen_sinks) * 0.75 + parseFloat(uclothes_washer) * 1.1 + parseFloat(cclothes_washer) * 2 + parseFloat(slop_sink)).toFixed(2);
+            document.getElementsByName('totalFU')[0].innerHTML = total_fu
+
+            var gpm = getGPM(total_fu);
+            document.getElementsByName('gpm')[0].innerHTML = gpm;
+            document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
+
+            document.getElementsByName('fu')[0].value = total_fu;
+            document.getElementsByName('g')[0].value = gpm;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+        }
+
+        function getGPM(fu){
+            var gpm = 0;
+
+            if (fu == 0) {
+
+            } else if ( fu < 401 ){
+                gpm = -0.0002 * fu * fu + 0.1694*fu + 9.4771;
+            } else if ( fu < 2001) {
+                gpm = 0.0513 * fu + 30.104;
+            }else if (fu < 3001) {
+                gpm = 0.0269 * fu + 80.524
+            }
+            return Number(gpm.toFixed(2));
+        }
+    </script>
+</body>
+</html>

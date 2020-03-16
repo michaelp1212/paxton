@@ -1,0 +1,134 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <div class="pdf_wrapper">
+        <div class='header'>
+            <div class='row clearfix'>
+                <div class='brand'>
+                    <img src="{{ url_for('static', filename='logo1.png') }}"  class="shark_btn stop" />
+                </div>
+                <div class='logo2' style="float:left; width:19%;">
+                    <img src="{{ url_for('static', filename='logo2.png') }}"  class="shark_btn stop" />
+                </div>
+            </div>
+        </div>
+        <div class='content'>
+            <h2 class='period'> Address: {{ address }}</h2>
+            <h2 class='period'> Number of Units: {{ nunit }}</h2>
+            <div class="clearfix main">
+                <table class="main_table">
+                    <tbody>
+                        <tr style="font-weight: bold;">
+                            <td>Fixture Type</td>
+                            <td>Count</td>
+                            <td>Extended</td>
+                        </tr>
+                        <tr>
+                            <td>Showers</td>
+                            <td>{{ showers }}</td>
+                            <td>{{ showers|float * 1.2|round(2, 'floor') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Bathroom Sinks</td>
+                            <td>{{ bathroom_sinks }}</td>
+                            <td>{{ bathroom_sinks|float * 0.75|round(2, 'floor') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kitchen Sinks</td>
+                            <td>{{ kitchen_sinks }}</td>
+                            <td>{{ kitchen_sinks|float * 0.75|round(2, 'floor') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dish Washers</td>
+                            <td>{{ dishwashers }}</td>
+                            <td>{{ dishwashers|float * 1.1|round(2, 'floor')}}</td>
+                        </tr>
+                        <tr>
+                            <td>In-Unit Clothes Washer</td>
+                            <td>{{ uclothes_washer }}</td>
+                            <td>{{ uclothes_washer|float * 1.1|round(2, 'floor') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Commercial Clothes Washer</td>
+                            <td>{{ cclothes_washer }}</td>
+                            <td>{{ cclothes_washer|int * 2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Slop Sink</td>
+                            <td>{{ slop_sink }}</td>
+                            <td>{{ slop_sink }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix main">
+                <table class="main_table">
+                    <tbody>
+                        <tr style="font-weight: bold;">
+                            <td>Total FU</td>
+                            <td>GPM</td>
+                            <td>Cv Required</td>
+                        </tr>
+                        <tr>
+                            <td>{{ total_fu }}</td>
+                            <td>{{ gpm }}</td>
+                            <td>{{ cv }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix main">
+                <p>This software is for apartment houses only. Please contact us for other applications.</p>
+                <p>To select a system, pick a valve with the closest Cv to the calculated required Cv. If the required Cv is between two options, it is generally suggested to go with the smaller size</p>
+                <p>Please feel free to reach out with any sizing questions or for selection help. We can be reached at:</p>
+                <p>By email: <a href="mailto:paxton@paxtoncorp.com">paxton@paxtoncorp.com</a></p>
+                <p>By phone: 718650-5510</p>
+            </div>
+            <div class="clearfix main">
+                <table class="ref_table">
+                    <tbody>
+                        <tr>
+                            <td>Model</td>
+                            <td>Size</td>
+                            <td>Cv</td>
+                        </tr>
+                        <tr>
+                            <td>TVS43-020</td>
+                            <td>¾”</td>
+                            <td>7.3</td>
+                        </tr>
+                        <tr>
+                            <td>TVS43-025</td>
+                            <td>1”</td>
+                            <td>11.6</td>
+                        </tr>
+                        <tr>
+                            <td>TVS43-032</td>
+                            <td>1 ¼”</td>
+                            <td>18.5</td>
+                        </tr>
+                        <tr>
+                            <td>TVS43-040</td>
+                            <td>1 ½”</td>
+                            <td>29.0</td>
+                        </tr>
+                        <tr>
+                            <td>TVS43-050</td>
+                            <td>2”</td>
+                            <td>46.3</td>
+                        </tr>
+                        <tr>
+                            <td>TVS43-065</td>
+                            <td>2 ½”</td>
+                            <td>65.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
