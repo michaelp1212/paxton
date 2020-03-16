@@ -86,6 +86,7 @@
                 <input name="fu" type="hidden" />
                 <input name="g" type="hidden" />
                 <input name="c" type="hidden" />
+                <input name="s" type="hidden" />
                 <input class="btn" type="button" value="Generate Report" onclick="onSubmit()" />
                 <input class="btn" type="button" value="Reset" onclick="onReset()"/>
             </div>
@@ -152,6 +153,7 @@
             }
 
             document.getElementsByName('sg')[0].innerHTML = str;
+            document.getElementsByName('s')[0].value = str;
         }
         function changeShowers(){
             showers = document.getElementsByName('showers')[0].value;
