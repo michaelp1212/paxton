@@ -5,6 +5,7 @@ sys.path.append('/home/me/Workspace')
 from flask import redirect, render_template, url_for, flash, request, Flask, send_file, jsonify, send_from_directory
 app = Flask(__name__)
 
+PATH = '/home/me/Workspace/paxton';
 @app.route("/", methods = ['GET', 'POST'])
 def index():
 
@@ -56,7 +57,7 @@ def index():
             cv
         )
 
-        pdf_path = "'/home/me/Workspace/paxton/Pdf/{}.pdf'".format(address)
+        pdf_path = "'{}/Pdf/{}.pdf'".format(PATH, address)
         cmd = "{}  {} {}".format('/usr/local/bin/wkhtmltopdf', url_path, pdf_path)
         a = os.system(cmd)
         return send_from_directory(directory='Pdf', filename=address + '.pdf', as_attachment=True)
@@ -111,7 +112,7 @@ def pdf():
         cv
     )
 
-    pdf_path = "'/home/me/Workspace/paxton/Pdf/{}.pdf'".format(address)
+    pdf_path = "'{}/Pdf/{}.pdf'".format(PATH, address)
     cmd = "{}  {} {}".format('/usr/local/bin/wkhtmltopdf', url_path, pdf_path)
     a = os.system(cmd)
 
@@ -180,4 +181,4 @@ def report():
                            cv = cv)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

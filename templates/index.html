@@ -71,11 +71,13 @@
                             <td>Total FU</td>
                             <td>GPM</td>
                             <td>Cv Required</td>
+                            <td>Suggested Selection</td>
                         </tr>
                         <tr>
                             <td><label name="totalFU" /></td>
                             <td><label name="gpm" /></td>
                             <td><label name="cv" /></td>
+                            <td><label name="sg" /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,6 +117,7 @@
             document.getElementsByName('totalFU')[0].innerHTML = ''
             document.getElementsByName('gpm')[0].innerHTML = '';
             document.getElementsByName('cv')[0].innerHTML = '';
+            document.getElementsByName('sg')[0].innerHTML = '';
 
             document.getElementsByName('extShowers')[0].innerHTML = '0';
             document.getElementsByName('extBathroom_sinks')[0].innerHTML = '0';
@@ -126,6 +129,29 @@
 
             document.getElementsByName('address')[0].value = '';
             document.getElementsByName('nunit')[0].value = 0;
+        }
+        function changeSg(cv){
+            var val = cv;
+            var str = '';
+            if (val < 5) {
+                str = 'unable to calculate selection, please contact Paxton';
+            } else if ((val >=5 ) && (val < 10)){
+                str = 'TVS43-020';
+            } else if ((val >=10 ) && (val < 16)){
+                str = 'TVS43-025';
+            } else if ((val >=16 ) && (val < 26)){
+                str = 'TVS43-032';
+            } else if ((val >=26 ) && (val < 38)){
+                str = 'TVS43-040';
+            } else if ((val >=38 ) && (val < 55)){
+                str = 'TVS43-050';
+            } else if ((val >=55 ) && (val < 76)){
+                str = 'TVS43-065';
+            } else {
+                str = 'Unable to calculate selection, please contact Paxton';
+            }
+
+            document.getElementsByName('sg')[0].innerHTML = str;
         }
         function changeShowers(){
             showers = document.getElementsByName('showers')[0].value;
@@ -147,6 +173,7 @@
             document.getElementsByName('fu')[0].value = total_fu;
             document.getElementsByName('g')[0].value = gpm;
             document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+            changeSg(Number((gpm * 0.377964).toFixed(2)));
         }
 
         function changeBathroom_sinks(){
@@ -169,6 +196,7 @@
             document.getElementsByName('fu')[0].value = total_fu;
             document.getElementsByName('g')[0].value = gpm;
             document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+            changeSg(Number((gpm * 0.377964).toFixed(2)));
         }
 
         function changeKitchen_sinks(){
@@ -191,6 +219,7 @@
             document.getElementsByName('fu')[0].value = total_fu;
             document.getElementsByName('g')[0].value = gpm;
             document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+            changeSg(Number((gpm * 0.377964).toFixed(2)));
         }
 
         function changeDishwashers(){
@@ -212,7 +241,8 @@
             document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
             document.getElementsByName('fu')[0].value = total_fu;
             document.getElementsByName('g')[0].value = gpm;
-            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+            changeSg(Number((gpm * 0.377964).toFixed(2)));
         }
 
         function changeUclothes_washer(){
@@ -234,7 +264,8 @@
             document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
             document.getElementsByName('fu')[0].value = total_fu;
             document.getElementsByName('g')[0].value = gpm;
-            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+            changeSg(Number((gpm * 0.377964).toFixed(2)));
         }
 
         function changeCclothes_washer(){
@@ -256,7 +287,8 @@
             document.getElementsByName('cv')[0].innerHTML = Number((gpm * 0.377964).toFixed(2));
             document.getElementsByName('fu')[0].value = total_fu;
             document.getElementsByName('g')[0].value = gpm;
-            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+            changeSg(Number((gpm * 0.377964).toFixed(2)));
         }
 
         function changeSlop_sink(){
@@ -279,7 +311,8 @@
 
             document.getElementsByName('fu')[0].value = total_fu;
             document.getElementsByName('g')[0].value = gpm;
-            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));;
+            document.getElementsByName('c')[0].value = Number((gpm * 0.377964).toFixed(2));
+            changeSg(Number((gpm * 0.377964).toFixed(2)));
         }
 
         function getGPM(fu){
