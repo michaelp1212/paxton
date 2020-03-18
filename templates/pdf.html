@@ -15,15 +15,16 @@
             </div>
         </div>
         <div class='content'>
+            <h1 style="font-size:1.8em;">TVS43 Domestic Hot Water Mixing Valve Sizing Program</h1>
             <h2 class='period'> Address: {{ address }}</h2>
-            <h2 class='period'> Number of Units: {{ nunit }}</h2>
+            <h2 class='period'> Number of Apartments: {{ nunit }}</h2>
             <div class="clearfix main">
                 <table class="main_table">
                     <tbody>
                         <tr style="font-weight: bold;">
                             <td>Fixture Type</td>
-                            <td>Count</td>
-                            <td>Extended</td>
+                            <td>Fixture Count</td>
+                            <td>Fixture Units</td>
                         </tr>
                         <tr>
                             <td>Showers</td>
@@ -71,19 +72,21 @@
                             <td>GPM</td>
                             <td>Cv Required</td>
                             <td>Suggested Selection</td>
+                            <td>Size</td>
                         </tr>
                         <tr>
                             <td>{{ total_fu }}</td>
                             <td>{{ gpm }}</td>
                             <td>{{ cv }}</td>
                             <td>{{ s }}</td>
+                            <td>{{ size }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="clearfix main">
-                <p>This software is for apartment houses only. Please contact us for other applications.</p>
-                <p>To select a system, pick a valve with the closest Cv to the calculated required Cv. If the required Cv is between two options, it is generally suggested to go with the smaller size</p>
+                <p><b>This software is for apartment houses only. Please contact us for other applications.</b></p>
+                <p>To select a system, pick a valve with the closest Cv to the calculated required Cv. If the required Cv is between two options, it is generally suggested to go with the smaller size.</p>
                 <p>Please feel free to reach out with any sizing questions or for selection help. We can be reached at:</p>
                 <p>By email: <a href="mailto:paxton@paxtoncorp.com">paxton@paxtoncorp.com</a></p>
                 <p>By phone: 718-650-5510</p>

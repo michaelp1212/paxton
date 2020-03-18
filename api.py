@@ -5,7 +5,7 @@ sys.path.append('/home/me/Workspace')
 from flask import redirect, render_template, url_for, flash, request, Flask, send_file, jsonify, send_from_directory
 app = Flask(__name__)
 
-PATH = '/home/me/Workspace/paxton';
+PATH = '/home/me/Workspace/paxton'
 @app.route("/", methods = ['GET', 'POST'])
 def index():
 
@@ -25,10 +25,11 @@ def index():
         gpm = ''
         cv = ''
         s = ''
+        size = ''
 
         if request.method == 'POST':
             bathroom_sinks = request.values['bathroom_sinks']
-            address = request.values['address']
+            address = request.values['address'].encode('utf-8')
             nunit = request.values['nunit']
             showers = request.values['showers']
             kitchen_sinks = request.values['kitchen_sinks']
@@ -42,8 +43,12 @@ def index():
             gpm = request.values['g']
             cv = request.values['c']
             s = request.values['s']
+            size = request.values['size']
 
-            url_path = "'http://localhost:5000/report?address={}&nunit={}&showers={}&bathroom_sinks={}&kitchen_sinks={}&dishwashers={}&uclothes_washer={}&cclothes_washer={}&slop_sink={}&path={}&fu={}&g={}&c={}&s={}'".format(
+            address = address.replace('"', '\"')
+            address = address.replace("'", "\'")
+
+            url_path = '"http://localhost:5000/report?address={}&nunit={}&showers={}&bathroom_sinks={}&kitchen_sinks={}&dishwashers={}&uclothes_washer={}&cclothes_washer={}&slop_sink={}&path={}&fu={}&g={}&c={}&s={}&size={}"'.format(
                 address,
                 nunit,
                 showers,
@@ -57,13 +62,14 @@ def index():
                 total_fu,
                 gpm,
                 cv,
-                s
+                s,
+                size.encode('utf-8')
             )
 
-            pdf_path = "'{}/Pdf/{}.pdf'".format(PATH, address)
+            pdf_path ='"{}/Pdf/{}.pdf"'.format(PATH, address)
             cmd = "{}  {} {}".format('/usr/local/bin/wkhtmltopdf', url_path, pdf_path)
             a = os.system(cmd)
-            return send_from_directory(directory='Pdf', filename=address + '.pdf', as_attachment=True)
+            return send_from_directory(directory='Pdf', filename=address.encode('utf-8') + '.pdf', as_attachment=True)
     return render_template('index.html')
 
 @app.route("/report", methods=['GET'])
@@ -83,6 +89,7 @@ def report():
     gpm = ''
     cv = ''
     s = ''
+    size = ''
 
     if request.method == 'GET':
         bathroom_sinks = request.values['bathroom_sinks']
@@ -100,6 +107,7 @@ def report():
         gpm = request.values['g']
         cv = request.values['c']
         s = request.values['s']
+        size = request.values['size']
 
     return render_template('pdf.html',
                            address = address,
@@ -115,7 +123,8 @@ def report():
                            total_fu = total_fu,
                            gpm = gpm,
                            cv = cv,
-                           s = s)
+                           s = s,
+                           size = size)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
